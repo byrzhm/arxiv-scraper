@@ -82,7 +82,7 @@ def get_llm_client(provider="openai"):
     """Factory function to get a LLM client based on the provider name."""
     from dotenv import load_dotenv
 
-    load_dotenv()
+    load_dotenv(override=True)
 
     provider = provider.lower()
 

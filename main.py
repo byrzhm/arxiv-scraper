@@ -3,13 +3,23 @@ from datetime import datetime
 from pathlib import Path
 import urllib.parse
 import re
-import os
 from llm_clients import get_llm_client
+from arxiv_categories import ARXIV_CATEGORY_CODES
+
 
 # Configuration
-MAX_RESULTS = 2  # Fetch more to filter later
-KEYWORDS = "infrastructure OR serving OR inference OR distributed OR training OR optimization OR efficiency OR systems OR scaling OR deployment"
-CATEGORIES = "cs.LG,cs.AI,cs.DC,cs.NE,cs.CL,cs.CV"  # Machine Learning, AI, Distributed Computing, Neural Networks, Computational Linguistics, Computer Vision
+MAX_RESULTS = 5  # Fetch more to filter later
+KEYWORDS = "infrastructure OR serving OR inference OR distributed OR training OR optimization OR efficiency OR systems OR deployment"
+CATEGORIES = ",".join(
+    [
+        ARXIV_CATEGORY_CODES["Machine Learning"],  # cs.LG
+        ARXIV_CATEGORY_CODES["Artificial Intelligence"],  # cs.AI
+        ARXIV_CATEGORY_CODES["Distributed Parallel and Cluster Computing"],  # cs.DC
+        ARXIV_CATEGORY_CODES["Neural and Evolutionary Computing"],  # cs.NE
+        ARXIV_CATEGORY_CODES["Computation and Language"],  # cs.CL
+        ARXIV_CATEGORY_CODES["Computer Vision and Pattern Recognition"],  # cs.CV
+    ]
+)
 DATE_TAG = datetime.now().strftime("%Y-%m-%d")
 MIN_RELEVANCE_SCORE = 0.2  # Lower the threshold since we'll filter manually anyway
 
@@ -316,9 +326,6 @@ Common ArXiv categories:
 
 # Main flow
 def main():
-    # Parse command line arguments
-    import sys
-
     args = parse_arguments()
 
     # Override global configuration with command line arguments

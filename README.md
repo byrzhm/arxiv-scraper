@@ -98,3 +98,8 @@ The default configuration searches for AI infrastructure related papers:
 ## Note
 
 This tool uses the ArXiv API, which has rate limits. The script includes a 1-second delay between requests to be respectful of these limits.
+
+## TODO
+
+- [ ] Define a consistent and clear summary format (e.g., problem, approach, result, significance)
+- [ ] Implement a feature to prioritize or filter papers by subscribed authors or institutions
